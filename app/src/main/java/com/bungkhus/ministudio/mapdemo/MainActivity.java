@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements OnCameraChangeLis
             @Override
             public void gotLocation(Location location){
 
-                LatLng airbnbLatLng = new LatLng(-6.8763, 107.6234);
                 //Got the location!
                 if(location!=null){
 
@@ -100,13 +99,19 @@ public class MainActivity extends AppCompatActivity implements OnCameraChangeLis
                     double longitude = location.getLongitude();
 
                     Log.e("MAP DEMO", "lat: " + latitude + ", long: " + longitude);
-                    airbnbLatLng = new LatLng(latitude, longitude);
-                    setupMapLocation(airbnbLatLng);
-                    // here you can save the latitude and longitude values
-                    // maybe in your text file or database
-
+                    LatLng latLng = new LatLng(latitude, longitude);
+                    map.animateCenterZoom(latLng, 15);
+                    // Add Circle
+                    map.drawCircle(latLng, 500);
+                    // enable my location
+                    map.setMyLocationEnabled(true);
                 }else{
-                    setupMapLocation(airbnbLatLng);
+//                    LatLng latLng = new LatLng(-6.8763, 107.6234);
+//                    map.animateCenterZoom(latLng, 15);
+//                    // Add Circle
+//                    map.drawCircle(latLng, 500);
+//                    // enable my location
+//                    map.setMyLocationEnabled(true);
                     Log.e("MAP DEMO", "Location is null.");
                     Toast.makeText(MainActivity.this, "Location is null",
                             Toast.LENGTH_SHORT).show();
@@ -122,23 +127,23 @@ public class MainActivity extends AppCompatActivity implements OnCameraChangeLis
         locationHelper.stopGettingLocationUpdates();
     }
 
-    void setupMapLocation(LatLng latLng){
-//        addMarker("Airbnb HQ", latLng, 1);
-        map.animateCenterZoom(latLng, 15);
-        // Add Circle
-        map.drawCircle(latLng, 500);
-        // enable my location
-        map.setMyLocationEnabled(true);
-    }
-
-    private void addMarker(String title, LatLng latLng, int id) {
-        map.addMarker(new AirMapMarker.Builder()
-                .id(id)
-                .position(latLng)
-                .title(title)
-                .iconId(R.drawable.pin)
-                .build());
-    }
+//    void setupMapLocation(LatLng latLng){
+////        addMarker("Airbnb HQ", latLng, 1);
+//        map.animateCenterZoom(latLng, 15);
+//        // Add Circle
+//        map.drawCircle(latLng, 500);
+//        // enable my location
+//        map.setMyLocationEnabled(true);
+//    }
+//
+//    private void addMarker(String title, LatLng latLng, int id) {
+//        map.addMarker(new AirMapMarker.Builder()
+//                .id(id)
+//                .position(latLng)
+//                .title(title)
+//                .iconId(R.drawable.pin)
+//                .build());
+//    }
 
     @Override public void onMapClick(LatLng latLng) {
         if (latLng != null) {

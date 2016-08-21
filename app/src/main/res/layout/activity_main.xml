@@ -13,9 +13,9 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:src="@drawable/send_location"
+        android:src="@drawable/alarm"
         app:fabSize="normal"
-        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
